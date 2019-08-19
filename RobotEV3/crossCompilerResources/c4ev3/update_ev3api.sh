@@ -16,8 +16,8 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 
 function clear {
-	rm -rf "$SCRIPTPATH/include/c4ev3"
-	mkdir -p "$SCRIPTPATH/include/c4ev3" "$SCRIPTPATH/include/c4ev3/ev3_sensors" "$SCRIPTPATH/include/c4ev3/ev3_inputs"
+	rm -rf "$SCRIPTPATH/ev3-api/include"
+	mkdir -p "$SCRIPTPATH/ev3-api/include" "$SCRIPTPATH/ev3-api/include/ev3_sensors" "$SCRIPTPATH/ev3-api/include/ev3_inputs"
 }
 
 function safe_cp {
@@ -30,9 +30,9 @@ function safe_cp {
 }
 
 function copy_headers {
-	safe_cp $C4EV3_PATH/src/*.h "$SCRIPTPATH/include/c4ev3"
-	safe_cp $C4EV3_PATH/src/ev3_sensors/*.h "$SCRIPTPATH/include/c4ev3/ev3_sensors"
-	safe_cp $C4EV3_PATH/src/ev3_inputs/*.h "$SCRIPTPATH/include/c4ev3/ev3_inputs"
+	safe_cp $C4EV3_PATH/src/*.h "$SCRIPTPATH/ev3-api/include"
+	safe_cp $C4EV3_PATH/src/ev3_sensors/*.h "$SCRIPTPATH/ev3-api/include/ev3_sensors"
+	safe_cp $C4EV3_PATH/src/ev3_inputs/*.h "$SCRIPTPATH/ev3-api/include/ev3_inputs"
 }
 
 function build_static_library {
@@ -52,7 +52,7 @@ function copy_static_library {
 	LIB_FOLDER="$2"
 	build_static_library "$CROSS_COMPILE"
 	mkdir -p "$SCRIPTPATH/$LIB_FOLDER"
-	safe_cp "$C4EV3_PATH/libev3api.a" "$SCRIPTPATH/$LIB_FOLDER/libev3api.a"
+	safe_cp "$C4EV3_PATH/libev3api.a" "$SCRIPTPATH/ev3-api/$LIB_FOLDER/libev3api.a"
 }
 
 clear
