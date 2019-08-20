@@ -1,18 +1,14 @@
-static int NEPOSoundVolume = 100;
+#ifndef NEPOSOUND
+#define NEPOSOUND
 
-inline void SetVolume(int volume) {
-    NEPOSoundVolume = volume;
-}
+#include "NEPODefs.h"
 
-inline int GetVolume() {
-    return NEPOSoundVolume;
-}
+void SetVolume(int volume);
 
-inline void PlaySystemSound (int soundName) {
-    PlaySoundEx(soundName, NEPOSoundVolume);
-}
+int GetVolume();
 
-inline void NEPOPlayTone (unsigned short frequency, unsigned short duration) {
-    PlayToneEx(frequency, duration, NEPOSoundVolume);
-    Wait(duration);
-}
+void PlaySystemSound (int soundName);
+
+void NEPOPlayTone (unsigned short frequency, unsigned short duration);
+
+#endif

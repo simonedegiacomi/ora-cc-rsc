@@ -3,8 +3,8 @@
 if [[ "$#" -ne 3 ]]
 then
     echo "Wrong number of arguments"
-    echo "copy_c4ev3.sh <c4ev3 path> <gcc glibc prefix> <gcc uclibc prefix>"
-    echo "example: ./copy_c4ev3.sh ../EV3-API arm-linux-gnueabi- arm-c4ev3-linux-uclibceabi-"
+    echo "update_ev3api.sh <c4ev3 path> <gcc glibc prefix> <gcc uclibc prefix>"
+    echo "example: ./update_ev3api.sh ../EV3-API arm-linux-gnueabi- arm-c4ev3-linux-uclibceabi-"
     exit
 fi
 
@@ -17,7 +17,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 function clear {
 	rm -rf "$SCRIPTPATH/ev3-api/include"
-	mkdir -p "$SCRIPTPATH/ev3-api/include" "$SCRIPTPATH/ev3-api/include/ev3_sensors" "$SCRIPTPATH/ev3-api/include/ev3_inputs"
+	mkdir -p "$SCRIPTPATH/ev3-api/include" "$SCRIPTPATH/ev3-api/include/ev3_sensors"
 }
 
 function safe_cp {
@@ -32,7 +32,6 @@ function safe_cp {
 function copy_headers {
 	safe_cp $C4EV3_PATH/src/*.h "$SCRIPTPATH/ev3-api/include"
 	safe_cp $C4EV3_PATH/src/ev3_sensors/*.h "$SCRIPTPATH/ev3-api/include/ev3_sensors"
-	safe_cp $C4EV3_PATH/src/ev3_inputs/*.h "$SCRIPTPATH/ev3-api/include/ev3_inputs"
 }
 
 function build_static_library {
@@ -51,7 +50,7 @@ function copy_static_library {
 	CROSS_COMPILE="$1"
 	LIB_FOLDER="$2"
 	build_static_library "$CROSS_COMPILE"
-	mkdir -p "$SCRIPTPATH/$LIB_FOLDER"
+	mkdir -p "$SCRIPTPATH/ev3-api/$LIB_FOLDER"
 	safe_cp "$C4EV3_PATH/libev3api.a" "$SCRIPTPATH/ev3-api/$LIB_FOLDER/libev3api.a"
 }
 

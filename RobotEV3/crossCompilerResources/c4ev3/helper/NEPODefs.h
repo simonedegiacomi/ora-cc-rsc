@@ -1,4 +1,5 @@
 #include <string>
+#include <ev3.h>
 
 #include "NEPOColors.h"
 #include "NEPOStrings.h"
@@ -14,9 +15,4 @@
 #include "NEPOLog.h"
 
 template<typename T, typename U>
-void assertNepo(bool test, std::string text, T left, std::string op, U right) {
-    if (!test) {
-        std::string testStatement = ToString(left) + " " + op + " " + ToString(right);
-        printf("Assertion failed: %s %s\n", text.c_str(), testStatement.c_str());
-    }
-}
+void assertNepo(bool test, std::string text, T left, std::string op, U right);
