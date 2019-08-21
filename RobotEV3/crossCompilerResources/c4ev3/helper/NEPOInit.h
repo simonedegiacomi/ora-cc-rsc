@@ -3,9 +3,11 @@
 
 #include <string>
 
-void inline NEPOInitEV3();
 
-void inline NEPOFreeEV3();
+
+void NEPOInitEV3();
+
+void NEPOFreeEV3();
 
 void deleteJustUploadedFlag();
 

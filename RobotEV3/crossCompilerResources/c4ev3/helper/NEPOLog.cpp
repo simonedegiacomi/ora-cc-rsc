@@ -64,18 +64,13 @@ std::string readEV3GyroSensorAsString (int port) {
            " rate: " + ToString(ReadEV3GyroSensor(port, EV3GyroRate));
 }
 
-std::string readHTColorSensorV2AsString (int port) {
-    int mode = HTColorV2->currentSensorMode[port];
-    switch (mode) {
-        case HT_COLOR_SENSOR_V2_DEFAULT_MODE:
-            return "color id: " + ToString(ReadHTColorSensorV2(port)) +
-                   " rgb: " + ToString(NEPOReadHTColorSensorV2RGB(port)) +
-                   " light: " + ToString(NEPOReadHTColorSensorV2Light(port));
-        case HT_COLOR_SENSOR_V2_PASSIVE_MODE:
-            return "ambient light: " + ToString(NEPOReadHTColorSensorV2AmbientLight(port));
-        default:
-            return "???";
-    }
+inline std::list<double> NEPOReadEV3ColorSensorRGB (int port) {
+    RGB rgb = ReadEV3ColorSensorRGB(port);
+    std::list<double> values;
+    _setListElementByIndex(values, 0, colorComponentValueToPercentage(rgb.red));
+    _setListElementByIndex(values, 1, colorComponentValueToPercentage(rgb.green));
+    _setListElementByIndex(values, 2, colorComponentValueToPercentage(rgb.blue));
+    return values;
 }
 
 std::string readEV3IrSensorAsString (int port) {
@@ -121,9 +116,10 @@ std::string readHTColorSensorV2AsString (int port) {
     switch (mode) {
         case HT_COLOR_SENSOR_V2_DEFAULT_MODE:
             return "color id: " + ToString(ReadHTColorSensorV2(port)) +
-                   " rgba: " + ToString(NEPOReadHTColorSensorV2RGBA(port));
+                   " rgb: " + ToString(NEPOReadHTColorSensorV2RGB(port)) +
+                   " light: " + ToString(NEPOReadHTColorSensorV2Light(port));
         case HT_COLOR_SENSOR_V2_PASSIVE_MODE:
-            return "ambient light: " + ToString(NEPOReadHTColorSensorV2Light(port, AmbientLight));
+            return "ambient light: " + ToString(NEPOReadHTColorSensorV2AmbientLight(port));
         default:
             return "???";
     }

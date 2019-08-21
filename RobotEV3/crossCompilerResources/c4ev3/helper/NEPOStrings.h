@@ -1,6 +1,7 @@
 #ifndef NEPOSTRINGS
 #define NEPOSTRINGS
 
+#include <list>
 #include "NEPOColors.h"
 
 

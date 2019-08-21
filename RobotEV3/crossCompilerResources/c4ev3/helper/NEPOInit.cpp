@@ -10,7 +10,7 @@
 
 bool initialized = false;
 
-void inline NEPOInitEV3 () {
+void NEPOInitEV3 () {
     if (initialized) {
         return;
     }
@@ -23,7 +23,7 @@ void inline NEPOInitEV3 () {
     SetLedPattern(LED_GREEN_PULSE);
 }
 
-void inline NEPOFreeEV3 () {
+void NEPOFreeEV3 () {
     SetLedPattern(LED_GREEN);
     FreeEV3();
     exit(0);
